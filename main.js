@@ -3,38 +3,56 @@ document.onreadystatechange = function() {
 	if (document.readyState == "interactive") {
 		// Load some stuff
 		add.onclick = saveFoot; 
+		loadSavedFeet();
 	}
 }
 
 function saveFoot() {
 
+	// Saves the contents of the form
+	// to localStorage
+
 	var name = document.getElementById('name');
 	var favoriteFoot = document.getElementById('favoriteFoot');
 
-	var savedFeet = document.getElementById('savedFeet');
-
-	console.log('[' + savedFeet.innerHTML + ']');
-	console.log(name.value);
-
-	if (savedFeet.innerHTML.indexOf("<li>No feet have been saved.</li>") > -1) {
-		savedFeet.innerHTML = '';
+	var list = JSON.parse(localStorage.getItem('list'));
+	if (list == null) {
+		list = {};
 	}
 
-	savedFeet.innerHTML = savedFeet.innerHTML + '<li>' + name.value + ' - ' + favoriteFoot.value + '</li>';
+	list[name.value] = favoriteFoot.value;
+
+	localStorage.setItem('list', JSON.stringify(list));
 
 	name.value = '';
 	favoriteFoot.value = '';
 
+	loadSavedFeet();
 
+}
 
+function loadSavedFeet() {
 
-	localStorage.setItem('test', '123');
-	localStorage.setItem('test2', 'lalalalalalalala');
+	// Pull from localStorage
+	// and update the Saved Feet list on the page
 
-	var test = localStorage.getItem('test');
+	var list = JSON.parse(localStorage.getItem('list'));
+	if (list == null) {
+		list = {
+			'Default': 'No feet have been saved.'
+		};
+	}
 
-	savedFeet.innerHTML = savedFeet.innerHTML + '<li>TEST: ' + test + '</li>';
+	var savedFeet = document.getElementById('savedFeet');
+	savedFeet.innerHTML = '';
 
-	localStorage.removeItem('test2');
+	for (var key in list) {
+		if (list.hasOwnProperty(key)) {
+			var node = document.createElement('li');
+			var textnode = document.createTextNode(key + ' - ' + list[key]);
+			node.appendChild(textnode);
+			savedFeet.appendChild(node);
+		}
+	}
 
 }
