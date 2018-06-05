@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+	<title>JavaScript localStorage</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body class="container bg-dark">
+	<h1 class="text-primary mt-5">JavaScript localStorage</h1>
+	<form class="mt-3 pb-3">
+		<div class="form-group">
+			<label for="name" class="text-light">Name</label>
+			<input id="name" class="form-control" type="text" placeholder="Enter your name">
+		</div>
+		<div class="form-group">
+			<label for="favoriteFoot" class="text-light">Favorite Foot</label>
+			<input id="favoriteFoot" class="form-control" type="text" placeholder="Left or Right?">
+		</div>
+		<button id="add" type="button" class="btn btn-primary">Submit</button>
+	</form>
+	<hr class="bg-primary" />
+	<h2 class="text-primary">Saved Feet</h2>
+	<div>
+		<ul id="savedFeet" class="text-light">
+			<li>No feet have been saved.</li>
+		</ul>
+	</div>
+	<script src="main.js"></script>
+</body>
+</html>
