@@ -4,6 +4,45 @@ document.onreadystatechange = function() {
 		// Load some stuff
 		add.onclick = saveFoot; 
 		loadSavedFeet();
+
+		var cheese = "Cheddar";
+		var cheeses = [ 'Cheddar', 'Gouda', 'American' ];
+		var number_of_cheeses = cheeses.length;
+		var cheese_winners = {
+			'first': 'Gouda',
+			'second': 'Cheddar',
+			'third': 'American',
+			'runner-ups': [ 'Brie', 'Colby', 'Bleu' ]
+		};
+
+		// Working with a string.
+		localStorage.setItem('my_cheese', cheese);
+		console.log(localStorage.getItem('my_cheese'));
+
+		// Working with a number.
+		localStorage.setItem('my_number_of_cheeses', number_of_cheeses);
+		console.log(localStorage.getItem('my_number_of_cheeses'));
+
+		// Working with an array.
+		// This doesn't work - array is squashed down into a string!
+		// localStorage.setItem('my_cheeses', cheeses);
+		// console.log(localStorage.getItem('my_cheeses'));
+		// console.log(cheeses);
+
+		// Working with an array, correctly.
+		localStorage.setItem('my_cheeses', JSON.stringify(cheeses));
+		console.log(JSON.parse(localStorage.getItem('my_cheeses')));
+
+		// Working with an object.
+		localStorage.setItem('my_cheese_winners', JSON.stringify(cheese_winners));
+		console.log(JSON.parse(localStorage.getItem('my_cheese_winners')));
+
+		// Clean up our mess.
+		localStorage.removeItem('my_cheese');
+		localStorage.removeItem('my_number_of_cheeses');
+		localStorage.removeItem('my_cheeses');
+		localStorage.removeItem('my_cheese_winners');
+
 	}
 }
 
